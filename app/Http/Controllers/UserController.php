@@ -46,7 +46,9 @@ class UserController extends Controller
             session()->put('id',$id);
             session()->put('role',$role);
 
-                return redirect('/dashboard');
+                //return redirect('/dashboard');
+                // Changed by: Geethaka
+                return redirect('/mainDash');
 
 
         }else{

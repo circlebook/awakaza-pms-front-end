@@ -22,7 +22,8 @@ Route::get('/', function () {
 //User
 
 Route::get('/dashboard',[UserController::class,'Dashboard']);
-Route::get('/userManagement',[UserController::class,'UserManagement']);
+//Route::get('/userManagement',[UserController::class,'UserManagement']); // Modfified by Geethaka
+Route::get('/userManagement',[UserController::class,'UserManagement'])->name('adminPortal');
 Route::post('/addUser',[UserController::class,'AddUser']);
 Route::post('/login',[UserController::class,'Login']);
 Route::get('/logout',[UserController::class,'Logout']);
@@ -33,4 +34,10 @@ Route::post('/editProfile',[UserController::class,'EditProfile']);
 Route::post('/resetPassword',[UserController::class,'ResetPassword']);
 Route::get('/disableUser{userId}',[UserController::class,'DisableUser']);
 
+//Modifications: Geethaka
+Route::get('/mainDash', function () {
+    return view('mainDash');
+});
 
+
+;

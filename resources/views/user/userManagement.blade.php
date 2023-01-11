@@ -193,6 +193,7 @@
                                        <option value="House Keeping Supervisor">House Keeping Supervisor</option>
                                        <option value="FrontOps">Front Ops Operator</option>
                                        <option value="FnB">FnB Operator</option>
+                                       <option value="BackOps">Back Ops Operator</option>
                                    </select>
                             </div>
                             <div class="mb-3">

@@ -35,8 +35,32 @@
 
 		}
 
+		.btn-denied {
+		  background-color: #ddd;
+		  border: none;
+		  color: black;
+		  padding: 16px 32px;
+		  text-align: center;
+		  font-size: 16px;
+		  margin: 4px 2px;
+		  transition: 0.3s;
+		  height: 20vh;
+		  display: flex;
+		  flex-direction: column;
+		  justify-content: center;
+		  font-size: 3vh;
+		  
+
+
+		}
+
 		.btn:hover {
 		  background-color: #39468C;
+		  color: white;
+		}
+
+		.btn-denied:hover {
+		  background-color: #ff5050;
 		  color: white;
 		}
 
@@ -86,15 +110,25 @@
 			</div>
 
 			<div class="col-2">
-				
+			@if($role == 'Admin')
 				<a href="{{ route('adminPortal') }}" class="btn m-2"><div style="margin: 2rem;">Admin Portal</div></a>
-
+			@else
+				<a href="" class="btn-denied m-2" data-toggle="modal" data-target="#accessDeniedPopUp"><div style="margin: 2rem;">Admin Portal</div></a>
+			@endif
 			</div>
 			<div class="col-2">
+			@if($role == 'Admin' || $role == 'FrontOps')
 				<a href="https://google.com" class="btn m-2"><div style="margin: 2rem;">Front Ops</div></a>
+			@else
+				<a href="" class="btn-denied m-2" data-toggle="modal" data-target="#accessDeniedPopUp"><div style="margin: 2rem;">Front Ops</div></a>
+			@endif
 			</div>
 			<div class="col-2">
+			@if($role == 'Admin' || $role == 'BackOps')
 				<a href="https://google.com" class="btn m-2"><div style="margin: 2rem;">Back Ops</div></a>
+			@else
+				<a href="" class="btn-denied m-2" data-toggle="modal" data-target="#accessDeniedPopUp"><div style="margin: 2rem;">Back Ops</div></a>
+			@endif
 			</div>
 
 			<div class="col-3">
@@ -111,12 +145,19 @@
 			</div>
 
 			<div class="col-2">
-				
+			@if($role == 'Admin' || $role == 'House Keeping Supervisor')
 				<a href="https://google.com" class="btn m-2"><div style="margin: 2rem;">House Keeping</div></a>
+			@else
+				<a href="" class="btn-denied m-2" data-toggle="modal" data-target="#accessDeniedPopUp"><div style="margin: 2rem;">House Keeping</div></a>
+			@endif
 
 			</div>
 			<div class="col-2">
+			@if($role == 'Admin' || $role == 'FnB')
 				<a href="https://google.com" class="btn m-2"><div style="margin: 2rem;">Billing</div></a>
+			@else
+				<a href="" class="btn-denied m-2" data-toggle="modal" data-target="#accessDeniedPopUp"><div style="margin: 2rem;">Billing</div></a>
+			@endif
 			</div>
 
 			<div class="col-4">
@@ -127,6 +168,27 @@
 		</div>
 	</div>
 	</div>
+
+	<!-- Access Denied Popup start -->
+	<div class="modal fade" id="accessDeniedPopUp" tabindex="-1" role="dialog" aria-labelledby="accessDeniedPopUpLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="accessDeniedPopUpLabel">Access Denied</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Sorry.. You don't have the permissions needed to access this page.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary px-3 py-1" style="border-radius: 10%;" data-dismiss="modal"><span>Close</span></button>
+      </div>
+    </div>
+  </div>
+</div>
+	<!-- Access Denied Popup End-->
 
 
 

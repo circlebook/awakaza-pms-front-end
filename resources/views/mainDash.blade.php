@@ -92,12 +92,18 @@
 <body>
 
 	<!-- Header -->
-	<div class="flex-container-row-rv" style="height: 0vh">
-		
+	<div class=" container-fluid" style="height: 5vh; box-shadow: 10px; background-color: white;">
+		<div class="flex-container-row-rv pr-5">
+		<img class="rounded-circle header-profile-user mr-2" src="assets/images/users/avatar-1.png" alt="Header Avatar">
+			<h5 class="my-2">
+				<span class="d-none d-xl-inline-block ms-1 mr-5" key="t-henry">{{\Illuminate\Support\Facades\Auth::user()->name}}</span>
+				<a class="text-danger" href="{{url('logout')}}"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">Logout</span></a>
+			</h5>
+		</div>
 	</div>
 	<!-- Header end -->
 
-	<div class="container-fluid" style="background-color:white; height: 100vh;">
+	<div class="container-fluid" style="background-color:white; height: 95vh;">
 		
 		<div class="flex-container-column">
 		<div class="row">

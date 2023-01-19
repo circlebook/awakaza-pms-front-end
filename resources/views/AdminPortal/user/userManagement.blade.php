@@ -28,7 +28,7 @@
 {{--    End Header--}}
 
 <!-- Left Sidebar Start  -->
-@include('Layout.sidebar')
+@include('Layout.AdminPortal.admin_sidebar')
 <!-- Left Sidebar End -->
 
 
@@ -190,8 +190,10 @@
                                 <label for="" class="form-label">Role</label>
                                    <select name="role" id="role" class="form-select">
                                        <option value="Admin">Admin</option>
-                                       <option value="Accountant">Accountant</option>
-                                       <option value="Data_Entry_Operator">Data Entry Operator</option>
+                                       <option value="House Keeping Supervisor">House Keeping Supervisor</option>
+                                       <option value="FrontOps">Front Ops Operator</option>
+                                       <option value="FnB">FnB Operator</option>
+                                       <option value="BackOps">Back Ops Operator</option>
                                    </select>
                             </div>
                             <div class="mb-3">

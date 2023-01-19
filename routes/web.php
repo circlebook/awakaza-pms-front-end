@@ -39,5 +39,28 @@ Route::get('/mainDash', function () {
     return view('mainDash');
 });
 
+Route::get('/Maintenance', function () {
+    return view('inDev');
+});
 
-;
+Route::get('/Admin_dashboard', function () {
+    return view('AdminPortal.Admin_dashboard');
+});
+
+Route::get('/FrontOps_dashboard', function () {
+    return view('FrontOps.FrontOps_Dashboard');
+});
+
+Route::get('/HouseKeeping_dashboard', function () {
+    return view('HouseKeeping.HouseKeeping_dashboard');
+});
+
+Route::get('/Billing_dashboard', function () {
+    return view('Billing.Billing_dashboard');
+});
+
+Route::get('/BackOps_dashboard', function () {
+    return view('BackOps.BackOps_dashboard');
+});
+
+//Modification: Geethaka End

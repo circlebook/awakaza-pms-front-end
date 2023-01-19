@@ -111,21 +111,21 @@
 
 			<div class="col-2">
 			@if($role == 'Admin')
-				<a href="{{ route('adminPortal') }}" class="btn m-2"><div style="margin: 2rem;">Admin Portal</div></a>
+				<a href="{{ url('Admin_dashboard') }}" class="btn m-2"><div style="margin: 2rem;">Admin Portal</div></a>
 			@else
 				<a href="" class="btn-denied m-2" data-toggle="modal" data-target="#accessDeniedPopUp"><div style="margin: 2rem;">Admin Portal</div></a>
 			@endif
 			</div>
 			<div class="col-2">
 			@if($role == 'Admin' || $role == 'FrontOps')
-				<a href="https://google.com" class="btn m-2"><div style="margin: 2rem;">Front Ops</div></a>
+				<a href="{{ url('FrontOps_dashboard') }}" class="btn m-2"><div style="margin: 2rem;">Front Ops</div></a>
 			@else
 				<a href="" class="btn-denied m-2" data-toggle="modal" data-target="#accessDeniedPopUp"><div style="margin: 2rem;">Front Ops</div></a>
 			@endif
 			</div>
 			<div class="col-2">
 			@if($role == 'Admin' || $role == 'BackOps')
-				<a href="https://google.com" class="btn m-2"><div style="margin: 2rem;">Back Ops</div></a>
+				<a href="{{ url('BackOps_dashboard') }}" class="btn m-2"><div style="margin: 2rem;">Back Ops</div></a>
 			@else
 				<a href="" class="btn-denied m-2" data-toggle="modal" data-target="#accessDeniedPopUp"><div style="margin: 2rem;">Back Ops</div></a>
 			@endif
@@ -146,7 +146,7 @@
 
 			<div class="col-2">
 			@if($role == 'Admin' || $role == 'House Keeping Supervisor')
-				<a href="https://google.com" class="btn m-2"><div style="margin: 2rem;">House Keeping</div></a>
+				<a href="{{ url('HouseKeeping_dashboard') }}" class="btn m-2"><div style="margin: 2rem;">House Keeping</div></a>
 			@else
 				<a href="" class="btn-denied m-2" data-toggle="modal" data-target="#accessDeniedPopUp"><div style="margin: 2rem;">House Keeping</div></a>
 			@endif
@@ -154,7 +154,7 @@
 			</div>
 			<div class="col-2">
 			@if($role == 'Admin' || $role == 'FnB')
-				<a href="https://google.com" class="btn m-2"><div style="margin: 2rem;">Billing</div></a>
+				<a href="{{ url('Billing_dashboard') }}" class="btn m-2"><div style="margin: 2rem;">Billing</div></a>
 			@else
 				<a href="" class="btn-denied m-2" data-toggle="modal" data-target="#accessDeniedPopUp"><div style="margin: 2rem;">Billing</div></a>
 			@endif

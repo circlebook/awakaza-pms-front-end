@@ -71,7 +71,7 @@ class UserController extends Controller
 
         $data = User::all();
 
-        return view('user.userManagement')->with('data',$data);
+        return view('AdminPortal.user.userManagement')->with('data',$data);
     }
     public function AddUser(Request $request){
 
@@ -99,7 +99,7 @@ class UserController extends Controller
     }
 
     public function ChangePasswordView($id){
-        return view('user.changePassword')->with('id',$id);
+        return view('AdminPortal.user.changePassword')->with('id',$id);
     }
     public function ChangePassword(Request $request){
 
@@ -129,7 +129,7 @@ class UserController extends Controller
 
         $data = User::find($id);
 
-        return view('user.editProfile')->with('data',$data);
+        return view('AdminPortal.user.editProfile')->with('data',$data);
 
     }
     public function EditProfile(Request $request){

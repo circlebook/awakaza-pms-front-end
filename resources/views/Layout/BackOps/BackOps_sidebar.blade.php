@@ -30,7 +30,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('/Maintenance')}}" class="waves-effect bx-fade-right-hover">
+                    <a href="{{url('/BackOps_PayerInfo')}}" class="waves-effect bx-fade-right-hover">
                         <i class="bx bx bxs-user"></i>
                         <span key="t-dashboards">Payer Info</span>
                     </a>

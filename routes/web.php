@@ -63,4 +63,8 @@ Route::get('/BackOps_dashboard', function () {
     return view('BackOps.BackOps_dashboard');
 });
 
+Route::get('/BackOps_PayerInfo', function () {
+    return view('BackOps.BackOps_PayerInfo');
+});
+
 //Modification: Geethaka End

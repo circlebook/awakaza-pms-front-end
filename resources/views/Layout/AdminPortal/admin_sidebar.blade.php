@@ -35,7 +35,7 @@
                 <li class="menu-title" key="t-menu">Locators</li>
 
                 <li>
-                    <a href="{{url('/Maintenance')}}" class="waves-effect bx-fade-right-hover">
+                    <a href="{{url('/locatorManagement')}}" class="waves-effect bx-fade-right-hover">
                         <i class="fa fa-solid fa-location-crosshairs"></i>
                         <span key="t-dashboards">Locator Management</span>
 

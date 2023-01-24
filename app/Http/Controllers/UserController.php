@@ -18,6 +18,8 @@ use Carbon\Carbon;
 use Illuminate\Testing\Fluent\Concerns\Has;
 use Illuminate\View\View;
 
+use Illuminate\Support\Facades\Http;
+
 class UserController extends Controller
 {
 
@@ -38,13 +40,21 @@ class UserController extends Controller
 
     public function Login(Request $request){
 
+        //$response = Http::post('http://127.0.0.1:8080/api/login', $request);
 
+        $response = Http::post('http://127.0.0.1:8080/api/login', [
+            'email' => $request->email,
+            'password' => $request->password,
+        ]);
+        $response = json_decode($response);
 
-        if (Auth::attempt(['email'=>$request->email,'password'=>$request->password,'isActive'=>1])){
-            $id = Auth::user()->id;
-            $role= Auth::user()->role;
+        if (!is_int($response)){          
+            $id = $response->id;
+            $role= $response->role;
+            $name = $response->name;
             session()->put('id',$id);
             session()->put('role',$role);
+            session()->put('name',$name);
 
                 //return redirect('/dashboard');
                 // Changed by: Geethaka

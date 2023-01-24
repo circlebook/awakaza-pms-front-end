@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-
+use App\Http\Controllers\locatorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,5 +66,9 @@ Route::get('/BackOps_dashboard', function () {
 Route::get('/BackOps_PayerInfo', function () {
     return view('BackOps.BackOps_PayerInfo');
 });
+
+Route::get('/locatorManagement',[locatorController::class,'LocatorManagementDisplay']);
+Route::post('/insertLocator',[locatorController::class,'InsertLocator']);
+Route::post('/editLocator',[locatorController::class,'EditLocator']);
 
 //Modification: Geethaka End

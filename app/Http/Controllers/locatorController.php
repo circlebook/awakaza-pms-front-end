@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\locator;
 use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 
 class locatorController extends Controller
 {
@@ -13,7 +14,9 @@ class locatorController extends Controller
 
     public function LocatorManagementDisplay(){
 
-        $response = Http::get('http://127.0.0.1:8080/api/locatorManagement');
+        //$response = Http::get('http://127.0.0.1:8080/api/locatorManagement');
+        $client = new Client();
+        $response = $client->get(config('app.api_url') .'/api/locatorManagement'); 
         $data = $response->getBody()->getContents();
         $data = json_decode($data);
 

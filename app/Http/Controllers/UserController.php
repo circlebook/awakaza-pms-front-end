@@ -19,6 +19,7 @@ use Illuminate\Testing\Fluent\Concerns\Has;
 use Illuminate\View\View;
 
 use Illuminate\Support\Facades\Http;
+use GuzzleHttp\Client;
 
 class UserController extends Controller
 {
@@ -40,13 +41,23 @@ class UserController extends Controller
 
     public function Login(Request $request){
 
-        //$response = Http::post('http://127.0.0.1:8080/api/login', $request);
+        // $response = Http::post('http://127.0.0.1:8080/api/login', [
+        //     'email' => $request->email,
+        //     'password' => $request->password,
+        // ]);
 
-        $response = Http::post('http://127.0.0.1:8080/api/login', [
-            'email' => $request->email,
-            'password' => $request->password,
+        $endpoint = config('app.api_url') . '/api/login';
+        $client = new Client();
+        $response = $client->post($endpoint, [
+            'form_params' => [
+                'email' => $request->email,
+                'password' => $request->password,
+            ],
+            'verify' => false,
+            'timeout' => 10,
         ]);
-        $response = json_decode($response);
+        $data = $response->getBody()->getContents();
+        $response = json_decode($data);
 
         if (!is_int($response)){          
             $id = $response->id;
@@ -59,7 +70,6 @@ class UserController extends Controller
                 //return redirect('/dashboard');
                 // Changed by: Geethaka
                 return redirect('/mainDash');
-
 
         }else{
             return view('home.login')->withErrors(['Incorrect Login Details', 'The Message']);
@@ -79,7 +89,12 @@ class UserController extends Controller
 
     public function UserManagement(){
 
-        $data = User::all();
+        //$response = Http::get('http://127.0.0.1:8080/api/usermanagement');
+        $client = new Client();
+        $response = $client->get(config('app.api_url') .'/api/usermanagement'); 
+
+        $data = $response->getBody()->getContents();
+        $data = json_decode($data);
 
         return view('AdminPortal.user.userManagement')->with('data',$data);
     }
@@ -92,20 +107,30 @@ class UserController extends Controller
 
         $userId = Str::random(7);
 
-        $user = new User;
+        $endpoint = config('app.api_url') . '/api/addUser';
+        $client = new Client();
+        $response = $client->post($endpoint, [
+            'form_params' => [
+                'userId' => $userId,
+                'name' => $request->name,
+                'email' => $request->email,
+                'contact' => $request->contact,
+                'password' => Hash::make($request->password),
+                'role' => $request->role,
+                'isActive' => 1
+            ],
+            'verify' => false,
+            'timeout' => 10,
+        ]);
+        $data = $response->getBody()->getContents();
+        $response = json_decode($data);
 
-        $user->userId = $userId;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->contact = $request->contact;
-        $user->password = Hash::make($request->password);
-        $user->role = $request->role;
-        $user->isActive =1;
-
-
-        $user->save();
-        return redirect()->back()->with('message', 'New User Added !');
-
+        if ($response==1){ 
+            return redirect()->back()->with('message', 'New User Added !');
+        }
+        else{
+            return redirect()->back()->withErrors('message', 'User Addition Failed !');
+        }
     }
 
     public function ChangePasswordView($id){
@@ -113,20 +138,22 @@ class UserController extends Controller
     }
     public function ChangePassword(Request $request){
 
-        $id = $request->id;
-        $cPwd = $request->cPwd;
-        $newPwd = $request->newPwd;
+        $endpoint = config('app.api_url') . '/api/changePassword';
+        $client = new Client();
+        $response = $client->post($endpoint, [
+            'form_params' => [
+                'userId' => $request->id,
+                'id' => $request->id,
+                'cPwd' => $request->cPwd,
+                'newPwd' => $request->newPwd
+            ],
+            'verify' => false,
+            'timeout' => 10,
+        ]);
+        $data = $response->getBody()->getContents();
+        $response = json_decode($data);
 
-        $data = User::find($id);
-
-        $oldPwd = $data->password;
-
-
-        if(Hash::check($cPwd,$oldPwd)){
-            $user = User::find($id);
-            $user->password = Hash::make($newPwd);
-            $user->save();
-
+        if($response==1){
             return redirect()->back()->with('message','Password Changed Sucessfully !');
         }else{
             return redirect()->back()->with('error','Your Current password does not matches with the password you provided. Please try again.');
@@ -157,19 +184,49 @@ class UserController extends Controller
     public function ResetPassword(Request $request){
 
         $userId = $request->userId;
+        $password = Hash::make($request->pwd);
 
-        User::where(['userId'=>$userId])->update([
-            'password'=>Hash::make($request->pwd)
+        $endpoint = config('app.api_url') . '/api/resetPassword';
+        $client = new Client();
+        $response = $client->post($endpoint, [
+            'form_params' => [
+                'userId' => $userId,
+                'password' => $password,
+            ],
+            'verify' => false,
+            'timeout' => 10,
         ]);
-        return redirect()->back()->with('message', 'Password Reset Successfully');
+        $data = $response->getBody()->getContents();
+        $response = json_decode($data);
+
+        if($response==1){
+            return redirect()->back()->with('message','Password Reset Successfull !');
+        }else{
+            return redirect()->back()->with('error','Password resest failed');
+        }
+        
 
     }
     public function DisableUser($userId){
 
-        User::where(['userId'=>$userId])->update([
-           'isActive'=>0
+        $endpoint = config('app.api_url') . '/api/disableUser';
+        $client = new Client();
+        $response = $client->post($endpoint, [
+            'form_params' => [
+                'userId' => $userId
+            ],
+            'verify' => false,
+            'timeout' => 10,
         ]);
-        return redirect()->back()->with('message', 'User Disable Successfully');
+        $data = $response->getBody()->getContents();
+        $response = json_decode($data);
+
+       
+        if($response==1){
+            return redirect()->back()->with('message', 'User Disable Successfull');
+        }else{
+            return redirect()->back()->with('error','User Disable failed');
+        }
     }
 
 

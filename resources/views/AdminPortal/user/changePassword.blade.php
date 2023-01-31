@@ -1,16 +1,13 @@
 
-
-
-
-
-
 @php
-$id = session('id')
+    $id = session('id');
+ 	$role = session('role');
+	$name = session('name');
 @endphp
 
 @if(!empty($id))
 
-@if(\Illuminate\Support\Facades\Auth::id()==$id)
+{{-- Need to add a method to authenticate user request --}}
 
 
 <!doctype html>
@@ -119,8 +116,8 @@ $role = session('role');
                                                 <div class="media-body align-self-center">
                                                     <div class="text-muted">
 
-                                                        <h5 class="font-size-20 text-truncate">{{\Illuminate\Support\Facades\Auth::user()->name}}</h5>
-                                                        <p class="text-muted mb-6 text-truncate">{{\Illuminate\Support\Facades\Auth::user()->role}}</p>
+                                                        <h5 class="font-size-20 text-truncate">{{$name}}</h5>
+                                                        <p class="text-muted mb-6 text-truncate">{{$role}}</p>
                                                     </div>
                                                 </div>
 
@@ -269,9 +266,6 @@ $role = session('role');
 
 
 </html>
-@else
-@include('Layout.notValidateUser')
-@endif
 @else
 @include('Layout.notValidateUser')
 @endif

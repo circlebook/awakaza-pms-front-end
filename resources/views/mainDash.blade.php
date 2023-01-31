@@ -2,7 +2,7 @@
 <!-- Author: Geethaka -->
 @php
     $id = session('id');
- $role = session('role');
+ 	$role = session('role');
 	$name = session('name');
 @endphp
 

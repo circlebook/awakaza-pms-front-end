@@ -5,7 +5,7 @@
 
 @if(!empty($id))
 
-@if(\Illuminate\Support\Facades\Auth::id()==$id && $role=='Admin')
+
 
 <!doctype html>
 <html lang="en">
@@ -285,9 +285,8 @@
 
 </script>
 </html>
-@else
-    @include('Layout.notValidateUser')
-@endif
+
+
 @else
     @include('Layout.notValidateUser')
 @endif

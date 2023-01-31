@@ -1,11 +1,11 @@
 @php
     $id = session('id');
- $role = session('role');
+    $role = session('role');
+	$name = session('name');
 @endphp
 
 @if(!empty($id))
 
-@if(\Illuminate\Support\Facades\Auth::id()==$id && $role=='Admin')
 
 <!doctype html>
 <html lang="en">
@@ -253,9 +253,6 @@
 
 </script>
 </html>
-@else
-    @include('Layout.notValidateUser')
-@endif
 @else
     @include('Layout.notValidateUser')
 @endif

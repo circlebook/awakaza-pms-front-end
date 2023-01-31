@@ -70,5 +70,6 @@ Route::get('/BackOps_PayerInfo', function () {
 Route::get('/locatorManagement',[locatorController::class,'LocatorManagementDisplay']);
 Route::post('/insertLocator',[locatorController::class,'InsertLocator']);
 Route::post('/editLocator',[locatorController::class,'EditLocator']);
+Route::get('/deleteLocator{locatorId}',[locatorController::class,'deleteLocator']);
 
 //Modification: Geethaka End

@@ -45,17 +45,24 @@ class locatorController extends Controller
         // $locator->save();
         // return redirect()->back()->with('message', 'New Locator Added !');
 
-        $response = Http::post('http://127.0.0.1:8080/api/addSupplier', [
-            'sName' =>  $request->sName,
-            'phone' =>  $request->phone,
-            'line1' =>  $request->line1,
-            'line2' =>  $request->line2,
-            'street' =>  $request->street,
-            'city' =>  $request->city
-
+        $endpoint = config('app.api_url') . '/api/insertLocator';
+        $client = new Client();
+        $response = $client->post($endpoint, [
+            'form_params' => [
+                'locatorId' => $request->InlocatorId,
+                'description' => $request->InlocatorDescription
+            ],
+            'verify' => false,
+            'timeout' => 10,
         ]);
         $data = $response->getBody()->getContents();
-        $data = json_decode($data);
+        $response = json_decode($data);
+
+        if($response==1){
+            return redirect()->back()->with('message','Locator added !');
+        }else{
+            return redirect()->back()->with('error','Failed to add locator');
+        }
     }
 
 }

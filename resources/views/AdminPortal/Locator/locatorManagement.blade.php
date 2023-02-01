@@ -1,10 +1,10 @@
 @php
     $id = session('id');
- $role = session('role');
+    $role = session('role');
+	$name = session('name');
 @endphp
 
 @if(!empty($id))
-
 
 
 <!doctype html>
@@ -45,12 +45,12 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0 font-size-18">Users</h4>
+                            <h4 class="mb-sm-0 font-size-18">Locators</h4>
 
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Users</a></li>
-                                    <li class="breadcrumb-item active">User Management</li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Locators</a></li>
+                                    <li class="breadcrumb-item active">Locator Management</li>
                                 </ol>
                             </div>
 
@@ -62,7 +62,7 @@
                 <div class="row">
                    <div class="col-md-3">
                        <button class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
-                          data-bs-target="#userAddModal">Add User</button>
+                          data-bs-target="#locatorAddModal">Add Locator</button>
                    </div>
                 </div>
                 <br>
@@ -97,44 +97,27 @@
                                     <table id="datatable-buttons" class="table table-responsive nowrap w-100">
                                     <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Contact</th>
-                                        <th>Role</th>
+                                        <th>Locator ID</th>
+                                        <th>Description</th>
                                         <th></th>
                                         <th></th>
-
                                     </tr>
                                     </thead>
 
 
                                     <tbody>
                                     @if(!empty($data))
-                                        @foreach($data as $item)
-                                            @if($item->id != $id)
-                                                @if($item->isActive == 1)
+                                        @foreach($data as $item)    
                                                 <tr>
-                                                    <td>{{$item->name}}</td>
-                                                    <td>{{$item->email}}</td>
-                                                    <td>{{$item->contact}}</td>
-                                                    <td>{{$item->role}}</td>
-                                                    <td><a href="{{url('disableUser').$item->userId}}" class="btn btn-outline-warning btn-sm waves-effect waves-light">Disable User</a> </td>
+                                                    <td>{{$item->locatorId}}</td>
+                                                    <td>{{$item->description}}</td>
                                                     <td><button data-bs-toggle="modal"
-                                                                data-bs-target="#resetPassword" data-id="{{$item->userId}}" class="btn btn-outline-danger btn-sm waves-effect waves-light">Reset Password</button> </td>
+                                                                data-bs-target="#editLocator" data-id="{{$item->locatorId}}" class="btn btn-outline-warning btn-sm waves-effect waves-light">Edit Locator</button> </td>
+                                                    <td><a href="{{url('deleteLocator').$item->locatorId}}" class="btn btn-outline-danger btn-sm waves-effect waves-light">Delete</a> </td>
                                                 </tr>
-                                                @else
-                                                    <tr style="color: red">
-                                                        <td>{{$item->name}}</td>
-                                                        <td>{{$item->email}}</td>
-                                                        <td>{{$item->contact}}</td>
-                                                        <td>{{$item->role}}</td>
-                                                        <td class="text-danger">Disabled</td>
-                                                        <td></td>
-                                                    </tr>
-                                                    @endif
-                                            @endif
+
                                         @endforeach
-                                        @endif
+                                    @endif
                                     </tbody>
                                 </table>
                                 </div>
@@ -153,49 +136,30 @@
 
 {{--        Modals--}}
 
-{{--        Add User modal--}}
+{{--        Add Locator modal--}}
 
-        <div id="userAddModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel"
+        <div id="locatorAddModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title mt-0" id="myModalLabel">Add User</h5>
+                        <h5 class="modal-title mt-0" id="myModalLabel">Add Locator</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{url('addUser')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{url('insertLocator')}}" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
                             <div class="mb-3">
-                                <label for="" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
+                                <label for="" class="form-label">Locator ID</label>
+                                <input type="text" class="form-control" id="InlocatorId" name="InlocatorId" required>
                             </div>
                             <div class="mb-3">
-                                <label for="" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
+                                <label for="" class="form-label">Description</label>
+                                <input type="text" class="form-control" id="InlocatorDescription" name="InlocatorDescription" required>
                             </div>
 
-                            <div class="mb-3">
-                                <label for="" class="form-label">Contact Number</label>
-                                <input type="number" class="form-control"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"  maxlength="10"
-
-                                id="contact" name="contact" required >
-                            </div>
-                            <div class="mb-3">
-                                <label for="" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="" class="form-label">Role</label>
-                                   <select name="role" id="role" class="form-select">
-                                       <option value="Admin">Admin</option>
-                                       <option value="House Keeping Supervisor">House Keeping Supervisor</option>
-                                       <option value="FrontOps">Front Ops Operator</option>
-                                       <option value="FnB">FnB Operator</option>
-                                       <option value="BackOps">Back Ops Operator</option>
-                                   </select>
-                            </div>
+                            
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary waves-effect waves-light">Save
                                     </button>
@@ -212,33 +176,37 @@
             </div>
         </div>
 
-{{--        password reset modal--}}
-        <div id="resetPassword" class="modal fade" tabindex="-1" aria-labelledby="resetPassword"
+{{--        Locator Edit modal--}}
+        <div id="editLocator" class="modal fade" tabindex="-1" aria-labelledby="editLocator"
              aria-hidden="true">
-            <div class="modal-dialog">
+             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title mt-0" id="myModalLabel">Reset Password</h5>
+                        <h5 class="modal-title mt-0" id="myModalLabel">Edit Locator</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{url('resetPassword')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{url('editLocator')}}" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
-                            <input type="text" class="form-control" id="id" name="userId" hidden required>
-
                             <div class="mb-3">
-                                <label for="" class="form-label">Enter Password</label>
-                                <input type="password" class="form-control" id="pwd" name="pwd" required>
+                                <label for="" class="form-label">Locator ID</label>
+                                <input type="text" class="form-control" id="id" name="id"  readonly hidden>
                             </div>
                             <div class="mb-3">
+                                <label for="" class="form-label">Description</label>
+                                <input type="text" class="form-control" id="EditlocatorDescription" name="EditlocatorDescription" required>
+                            </div>
+
+                            
+                            <div class="mb-3">
                                 <button type="submit" class="btn btn-primary waves-effect waves-light">Save
-                                </button>
+                                    </button>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button"class="btn btn-outline-danger waves-effect waves-light"
+                        <button type="button" class="btn btn-outline-danger waves-effect waves-light"
                                 data-bs-dismiss="modal">Close</button>
 
                     </div>
@@ -285,8 +253,6 @@
 
 </script>
 </html>
-
-
 @else
     @include('Layout.notValidateUser')
 @endif

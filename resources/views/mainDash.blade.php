@@ -2,7 +2,8 @@
 <!-- Author: Geethaka -->
 @php
     $id = session('id');
- $role = session('role');
+ 	$role = session('role');
+	$name = session('name');
 @endphp
 
 @if(!empty($id))
@@ -85,6 +86,12 @@
 		}
 
 
+		.flex-container-row-opposite{
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			
+		}
 
 	</style>
 	
@@ -96,7 +103,7 @@
 		<div class="flex-container-row-rv pr-5">
 		<img class="rounded-circle header-profile-user mr-2" src="assets/images/users/avatar-1.png" alt="Header Avatar">
 			<h5 class="my-2">
-				<span class="d-none d-xl-inline-block ms-1 mr-5" key="t-henry">{{\Illuminate\Support\Facades\Auth::user()->name}}</span>
+				<span class="d-none d-xl-inline-block ms-1 mr-5" key="t-henry">{{ $name }}</span>
 				<a class="text-danger" href="{{url('logout')}}"><i class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span key="t-logout">Logout</span></a>
 			</h5>
 		</div>
@@ -116,11 +123,11 @@
 			</div>
 
 			<div class="col-2">
-			@if($role == 'Admin')
-				<a href="{{ url('Admin_dashboard') }}" class="btn m-2"><div style="margin: 2rem;">Admin Portal</div></a>
-			@else
-				<a href="" class="btn-denied m-2" data-toggle="modal" data-target="#accessDeniedPopUp"><div style="margin: 2rem;">Admin Portal</div></a>
-			@endif
+					@if($role == 'Admin')
+						<a href="{{ url('Admin_dashboard') }}" class="btn m-2"><div style="margin: 2rem;">Admin Portal</div></a>
+					@else
+						<a href="" class="btn-denied m-2" data-toggle="modal" data-target="#accessDeniedPopUp"><div style="margin: 2rem;">Admin Portal</div></a>
+					@endif
 			</div>
 			<div class="col-2">
 			@if($role == 'Admin' || $role == 'FrontOps')

@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\locatorController;
-
+use App\Http\Controllers\grcController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -72,3 +72,12 @@ Route::post('/insertLocator',[locatorController::class,'InsertLocator']);
 Route::post('/editLocator',[locatorController::class,'EditLocator']);
 
 //Modification: Geethaka End
+
+//Modification:Tehan Start
+
+Route::get('/grcForm', function () {
+    return view('FrontOps.FrontOps_Grc');
+});
+
+Route::post('/createGrc',[grcController::class,'createGrc']);
+

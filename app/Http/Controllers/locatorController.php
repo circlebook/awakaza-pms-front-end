@@ -49,7 +49,7 @@ class locatorController extends Controller
         $client = new Client();
         $response = $client->post($endpoint, [
             'form_params' => [
-                'locatorId' => $request->InlocaidtorId,
+                'locatorId' => $request->InlocatorId,
                 'description' => $request->InlocatorDescription
             ],
             'verify' => false,

@@ -113,7 +113,7 @@
                                                     <td>{{$item->description}}</td>
                                                     <td><button data-bs-toggle="modal"
                                                                 data-bs-target="#editLocator" data-id="{{$item->locatorId}}" class="btn btn-outline-warning btn-sm waves-effect waves-light">Edit Locator</button> </td>
-                                                    <td><a href="{{url('DeleteLocator').$item->locatorId}}" class="btn btn-outline-danger btn-sm waves-effect waves-light">Delete</a> </td>
+                                                    <td><a href="{{url('deleteLocator').$item->locatorId}}" class="btn btn-outline-danger btn-sm waves-effect waves-light">Delete</a> </td>
                                                 </tr>
 
                                         @endforeach
@@ -191,7 +191,7 @@
                             {{csrf_field()}}
                             <div class="mb-3">
                                 <label for="" class="form-label">Locator ID</label>
-                                <input type="text" class="form-control" id="EditlocatorId" name="EditlocatorId" value="{{ $item->locatorId }}" required>
+                                <input type="text" class="form-control" id="id" name="id"  readonly hidden>
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Description</label>

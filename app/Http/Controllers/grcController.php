@@ -21,6 +21,7 @@ class grcController extends Controller
                 'birthDay' => $request->birthDay,
                 'phoneNo' => $request->phoneNo,
                 'email' => $request->email,
+                'roomNo' => 2,
                 'arrivalD' => $request->arrivalD,
                 'departureD' => $request->departureD,
             ],

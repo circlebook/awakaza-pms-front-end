@@ -23,7 +23,7 @@
                 <li class="menu-title" key="t-menu">Guest Reg Cards</li>
 
                 <li>
-                    <a href="{{url('/Maintenance')}}" class="waves-effect bx-fade-right-hover">
+                    <a href="{{url('/grcForm')}}" class="waves-effect bx-fade-right-hover">
                         <i class="bx bx bxs-user"></i>
                         <span key="t-dashboards">Create GRC</span>
 

@@ -24,7 +24,7 @@
                 <li class="menu-title" key="t-menu">Reservations</li>
 
                 <li>
-                    <a href="{{url('/Maintenance')}}" class="waves-effect bx-fade-right-hover">
+                    <a href="{{url('/BackOps_Reservation_Confirmed')}}" class="waves-effect bx-fade-right-hover">
                         <i class="fa fa-light fa-people-roof"></i>
                         <span key="t-dashboards">Reservation Management</span>
                     </a>

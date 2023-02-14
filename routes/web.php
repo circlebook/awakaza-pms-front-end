@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\locatorController;
-
+use App\Http\Controllers\payerinfoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -72,3 +72,12 @@ Route::post('/insertLocator',[locatorController::class,'InsertLocator']);
 Route::post('/editLocator',[locatorController::class,'EditLocator']);
 
 //Modification: Geethaka End
+Route::get('/BackOps_PayerInfo', function () {
+    return view('BackOps.BackOps_PayerInfo');
+});
+
+Route::post('/addPayerInfo',[payerinfoController::class,'Insertpayerinfo']);
+
+Route::get('/BackOps_Reservation_Confirmed', function () {
+    return view('BackOps.BackOps_Reservation_Confirmed');
+});

@@ -23,8 +23,6 @@ use GuzzleHttp\Client;
 
 class UserController extends Controller
 {
-
-
     public function Index(){
 //        session()->forget('role');
 //        session()->forget('id');

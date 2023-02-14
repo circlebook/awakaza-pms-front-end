@@ -36,7 +36,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{url('/Maintenance')}}" class="waves-effect bx-fade-right-hover">
+                    <a href="{{url('/BackOps_Meal')}}" class="waves-effect bx-fade-right-hover">
                         <i class="fa fa-solid fa-utensils"></i>
                         <span key="t-dashboards">Meal Plan</span>
                     </a>

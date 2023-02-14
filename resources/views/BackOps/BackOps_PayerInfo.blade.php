@@ -59,7 +59,7 @@
   </div>
    <!--
 <fieldset class="row mb-3 px-3">
-<label class="col-md-6">Do you wish to pay advance?</label>  
+<label class="col-md-7">Do you wish to pay advance?</label>  
     <div class="col-sm-10">
       <div class="form-check">
         <input class="form-check-input" type="radio" name="result" id="result" value="option1" checked>

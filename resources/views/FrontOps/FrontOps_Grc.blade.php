@@ -3,7 +3,7 @@
 <head>
 @include('Layout.appStyles')
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
 
 </head>
 <body data-sidebar="dark">
@@ -21,7 +21,24 @@
 <!-- Left Sidebar End -->
 <section class="pt-5 col-4 container" style="margin-top:3%;">
 
-
+<!-- added by geethaka -->
+          @if(session()->has('message'))
+                        <div class="col-md-4">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session()->get('message') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+          @endif
+          @foreach ($errors->all() as $error)
+                        <div class="col-md-4">
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ $error }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        </div>
+         @endforeach
+<!-- geethaka end -->
 
 <form class="shadow rounded" style="margin-top:10%; background-image: linear-gradient(to right, rgb(230,230,250) , rgb(176,196,222));" action="{{url('createGrc')}}" method="post">
 {{csrf_field()}}
@@ -84,5 +101,6 @@
 </div>
 </form>
 </section> 
+@include('Layout.appJs')
 </body>
 </html>

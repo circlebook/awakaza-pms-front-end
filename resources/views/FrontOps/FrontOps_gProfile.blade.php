@@ -19,11 +19,14 @@
     <!-- ========== Left Sidebar Start ========== -->
 @include('Layout.FrontOps.FrontOps_sidebar')
 <!-- Left Sidebar End -->
-<section class="pt-5 col-4 container" style="margin-top:3%;">
+<div class="main-content">
+
+        <div class="page-content">
+            <div class="container-fluid">
 
 
 
-<form class="shadow rounded" style="margin-top:10%; background-image: linear-gradient(to right, rgb(230,230,250) , rgb(176,196,222));" action="{{url('createGprofile')}}" method="post">
+<form class="shadow rounded" style="background-image: linear-gradient(to right, rgb(230,230,250) , rgb(176,196,222));" action="{{url('createGprofile')}}" method="post">
 {{csrf_field()}}
 <h4 class="text-center pt-3 mb-3">Create Guest Profile</h4>
 <div class="container">
@@ -73,6 +76,8 @@
 </div>
 </div>
 </form>
-</section> 
+</div>
+</div>
+</div>
 </body>
 </html>

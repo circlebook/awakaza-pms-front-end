@@ -65,4 +65,26 @@ class locatorController extends Controller
         }
     }
 
+
+    public function deleteLocator($locatorId){
+        $endpoint = config('app.api_url') . '/api/deleteLocator';
+        $client = new Client();
+        $response = $client->post($endpoint, [
+            'form_params' => [
+                'locatorId' => $locatorId
+            ],
+            'verify' => false,
+            'timeout' => 10,
+        ]);
+        $data = $response->getBody()->getContents();
+        $response = json_decode($data);
+
+        if($response==1){
+            return redirect()->back()->with('message','Locator deleted !');
+        }else{
+            return redirect()->back()->with('error','Failed to delete locator');
+        }
+
+    }
+
 }

@@ -70,6 +70,17 @@ Route::get('/BackOps_PayerInfo', function () {
 Route::get('/locatorManagement',[locatorController::class,'LocatorManagementDisplay']);
 Route::post('/insertLocator',[locatorController::class,'InsertLocator']);
 Route::post('/editLocator',[locatorController::class,'EditLocator']);
+Route::get('/deleteLocator{locatorId}',[locatorController::class,'deleteLocator']);
+
+//Modification: Geethaka End
+
+//Modification:Tehan Start
+
+Route::get('/grcForm', function () {
+    return view('FrontOps.FrontOps_Grc');
+});
+
+Route::post('/createGrc',[grcController::class,'createGrc']);
 
 //Modification: Geethaka End
 

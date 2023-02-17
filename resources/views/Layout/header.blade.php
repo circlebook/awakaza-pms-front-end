@@ -3,7 +3,20 @@
     $role = session('role');
 	$name = session('name');
 @endphp
-
+<!-- added by Geethaka: ajax function to get notifications -->
+<script>
+         function getMessage() {
+            $.ajax({
+               type:'POST',
+               url:'/getnotifications',
+               data:'_token = <?php echo csrf_token() ?>',
+               success:function(data) {
+                
+               }
+            });
+         }
+</script>
+<!-- end Geethaka -->
 
 
 <header id="page-topbar">
@@ -61,6 +74,13 @@
                             <div class="col">
                                 <h6 class="m-0" key="t-notifications"> Notifications </h6>
                             </div>
+                            <!-- Added by geethaka -->
+                            <div class="d-flex flex-column">
+                                <div style="border-style='solid'; border">hello 1</div>
+                                <div><hr></div>
+                                
+                            </div>
+                             <!-- Geethaka End -->
 
                         </div>
                     </div>

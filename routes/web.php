@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\locatorController;
 use App\Http\Controllers\grcController;
+use App\Http\Controllers\notificationController;
+use App\Http\Controllers\roomController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,7 +73,8 @@ Route::get('/locatorManagement',[locatorController::class,'LocatorManagementDisp
 Route::post('/insertLocator',[locatorController::class,'InsertLocator']);
 Route::post('/editLocator',[locatorController::class,'EditLocator']);
 Route::get('/deleteLocator{locatorId}',[locatorController::class,'deleteLocator']);
-
+Route::get('/getNotifications',[notificationController::class,'getNotifications']);
+Route::get('/roomManagement',[roomController::class,'roomManagement']);
 //Modification: Geethaka End
 
 //Modification:Tehan Start

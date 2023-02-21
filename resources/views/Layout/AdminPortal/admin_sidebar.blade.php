@@ -41,6 +41,16 @@
 
                     </a>
                 </li>
+
+                <li class="menu-title" key="t-menu">Rooms</li>
+
+                <li>
+                    <a href="{{url('/roomManagement')}}" class="waves-effect bx-fade-right-hover">
+                        <i class="bx bx bxs-building"></i>
+                        <span key="t-dashboards">Room Management</span>
+
+                    </a>
+                </li>
                 <!-- Add End -->
                 @endif
 

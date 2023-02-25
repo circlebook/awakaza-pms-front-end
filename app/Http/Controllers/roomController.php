@@ -27,4 +27,57 @@ class roomController extends Controller
 
         return $data;
     }
+
+    public function addRoom(Request $request){
+
+        $endpoint = config('app.api_url') . '/api/addRoom';
+        $client = new Client();
+        $response = $client->post($endpoint, [
+            'form_params' => [
+                'roomTypeId' => $request->InRoomType,
+                'bedType' => $request->bedType,
+                'airConditioning' => $request->InAir,
+                'miniBar' => $request->miniBar,
+                'cleanState' => $request->cleanState
+            ],
+            'verify' => false,
+            'timeout' => 10,
+        ]);
+        $data = $response->getBody()->getContents();
+        $response = json_decode($data);
+
+        if($response==1){
+            return redirect()->back()->with('message','Room added !');
+        }else{
+            return redirect()->back()->with('error','Failed to add Room');
+        }
+    }
+
+    public function editRoom(Request $request){
+        $endpoint = config('app.api_url') . '/api/editRoom';
+        $client = new Client();
+        $response = $client->post($endpoint, [
+            'form_params' => [
+                'roomNo' => $request->roomNo,
+                'roomTypeId' => $request->InRoomType,
+                'bedType' => $request->bedType,
+                'airConditioning' => $request->InAir,
+                'miniBar' => $request->miniBar,
+                'cleanState' => $request->cleanState
+            ],
+            'verify' => false,
+            'timeout' => 10,
+        ]);
+        $data = $response->getBody()->getContents();
+        $response = json_decode($data);
+
+        if($response==1){
+            return redirect()->back()->with('message','Room Details Updated !');
+        }else{
+            return redirect()->back()->with('error','Failed to update Room Details');
+        }
+
+
+
+    }
 }

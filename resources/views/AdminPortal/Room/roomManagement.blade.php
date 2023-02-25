@@ -25,6 +25,37 @@
             text-align: center;
             font-size: 2vh;
         }
+
+        .whiteCard{
+            
+
+        }
+
+        .labelForm{
+            font-weight: bold;
+        }
+
+        .FormRows{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            
+        }
+
+
+        .FormCols{
+            display: flex;
+            flex-direction: column;
+            
+        }
+
+        .tableNameField{
+            width: 20%;
+        }
+
+        .tableValueFieldItem{
+            width: 50%;
+        }
     </style>
 </head>
 
@@ -121,7 +152,7 @@
                                     @if(!empty($data))
                                         @foreach($data as $item)    
                                                 <tr>
-                                                    <td class="text-body fw-bold"><div class="roomNo">{{$item->roomNo}}</p></td>
+                                                    <td class="text-body fw-bold"><div class="roomNo">{{$item->roomNo}}</div></td>
                                                     <td>
                                                     @for ($i = 0; $i < $item->roomTypeId; $i++)
                                                         <i class="bx bx-star"></i>
@@ -134,8 +165,16 @@
                                                         <span class="badge badge-pill badge-soft-danger font-size-11">dirty</span>
                                                         @endif
                                                     </td>
-                                                    <td><a href="{{url('viewRoom'.$item->roomNo)}}" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">View Details</a> </td>
+                                                    <td>
+                                                    <button id="{{$item->roomNo}}" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#viewRoomDetailsModal" 
+                                                     data-cleanState="{{$item->cleanState}}"
+                                                     data-roomTypeId="{{$item->roomTypeId}}"
+                                                     data-airConditioning="{{$item->airConditioning}}" 
+                                                     data-miniBar="{{$item->miniBar}}"
+                                                     data-bedType="{{$item->bedType}}"
+                                                     >View Details</button>   </td>
                                                 </tr>
+                                                
 
                                         @endforeach
                                     @endif
@@ -157,9 +196,9 @@
 
 {{--        Modals--}}
 
-{{--        Add Locator modal--}}
+{{--        Add Room modal--}}
 
-        <div id="roomAddModal" class="modal fade" tabindex="-1" aria-labelledby="roomAddModal"
+<div id="roomAddModal" class="modal fade" tabindex="-1" aria-labelledby="roomAddModal"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -169,31 +208,48 @@
                                 aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{url('insertLocator')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{url('addRoom')}}" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
                             <div class="mb-3">
-                                <label for="" class="form-label">Room No</label>
-                                <input type="text" class="form-control" id="InlocatorId" name="InRoomNo" required>
-                            </div>
-                            <div class="mb-3">
-                                <label for="InRoomType">Room Type</label>
-                                <select name="InRoomType" id="InRoomType" class="m-2 px-3">
+                                <label for="" class="form-label">Room Type</label>
+                                <select name="InRoomType" id="InRoomType" class="form-select">
                                 @if(!empty($roomTypes))
-                                        @foreach($roomTypes as $item)
-                                        
-                                        <option value="{$item->id}}">{{$item->id}} rated</option>
-                    
+                                        @foreach($roomTypes as $item)                    
+                                        <option value="{{$item->id}}">{{$item->id}} rated</option>                   
                                     @endforeach
                                 @endif
                                 </select>
-                            </div> 
+                            </div>
                             <div class="mb-3">
-                                <label for="airConditioning">Air Conditioning: </label><br>
-                                <label for="1" class="mx-2">Available</label>
-                                <input type="radio" id="airConditioning" name="airConditioning" value="1">
-                                <label for="0" class="mx-2 pl-4">Not Available</label>
-                                <input type="radio" id="airConditioning" name="airConditioning" value="0">
-                            </div> 
+                                <label for="" class="form-label">Air Conditioning</label>
+                                <select name="InAir" id="InAir" class="form-select">   
+                                        <option value="1" selected>yes</option>
+                                        <option value="0">no</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="" class="form-label">Bed Type</label>
+                                <select name="bedType" id="bedType" class="form-select">   
+                                        <option value="double" selected>double</option>
+                                        <option value="single">single</option>
+                                        <option value="queen">queen</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">mini Bar</label>
+                                <select name="miniBar" id="miniBar" class="form-select">   
+                                        <option value="1" selected>yes</option>
+                                        <option value="0">no</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Clean State</label>
+                                <select name="cleanState" id="cleanState" class="form-select">   
+                                        <option value="dirty" selected>dirty</option>
+                                        <option value="clean">clean</option>
+                                </select>
+                            </div>
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary waves-effect waves-light">Save
                                     </button>
@@ -211,30 +267,61 @@
         </div>
 
 {{--  Room details modal--}}
-        <div id="viewRoom" class="modal fade" tabindex="-1" aria-labelledby="viewRoom"
+<div id="viewRoomDetailsModal" class="modal fade" tabindex="-1" aria-labelledby="viewRoomDetailsModal"
              aria-hidden="true">
-             <div class="modal-dialog">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title mt-0" id="myModalLabel">Edit Locator</h5>
+                        <h5 class="modal-title mt-0" id="roomNo" class="roomNo"></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form action="{{url('viewRoom')}}" method="post" enctype="multipart/form-data">
+                        <form action="{{url('editRoom')}}" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}
                             <div class="mb-3">
-                                <label for="" class="form-label">Room No</label>
-                                <input type="text" class="form-control" id="id" name="id"  readonly hidden>
+                                <input type="text" class="form-control" id="roomNo" name="roomNo" hidden required>
+                                <label for="" class="form-label">Room Type</label>
+                                <select name="InRoomType" id="InRoomType" class="form-select">
+                                @if(!empty($roomTypes))
+                                        @foreach($roomTypes as $item)                    
+                                        <option value="{{$item->id}}">{{$item->id}} rated</option>                   
+                                    @endforeach
+                                @endif
+                                </select>
                             </div>
                             <div class="mb-3">
-                                <label for="" class="form-label">Description</label>
-                                <input type="text" class="form-control" id="EditlocatorDescription" name="EditlocatorDescription" required>
+                                <label for="" class="form-label">Air Conditioning</label>
+                                <select name="InAir" id="InAir" class="form-select">   
+                                        <option value="1" selected>yes</option>
+                                        <option value="0">no</option>
+                                </select>
                             </div>
 
-                            
                             <div class="mb-3">
-                                <button type="submit" class="btn btn-primary waves-effect waves-light">Save
+                                <label for="" class="form-label">Bed Type</label>
+                                <select name="bedType" id="bedType" class="form-select">   
+                                        <option value="double" selected>double</option>
+                                        <option value="single">single</option>
+                                        <option value="queen">queen</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">mini Bar</label>
+                                <select name="miniBar" id="miniBar" class="form-select">   
+                                        <option value="1" selected>yes</option>
+                                        <option value="0">no</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="" class="form-label">Clean State</label>
+                                <select name="cleanState" id="cleanState" class="form-select">   
+                                        <option value="dirty" selected>dirty</option>
+                                        <option value="clean">clean</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary waves-effect waves-light">Update
                                     </button>
                             </div>
                         </form>
@@ -277,13 +364,62 @@
 @include('Layout.appJs')
 </body>
 <script>
-    $('#resetPassword').on('show.bs.modal', function (event) {
+    $('#viewRoomDetailsModal').on('show.bs.modal', function (event) {
+        
         let button = $(event.relatedTarget)
-        let id = button.data('id')
+        let roomNo = button.attr('id')
+        let cleanState = button.attr('data-cleanState')
+        let roomTypeId = button.attr('data-roomTypeId')
+        let bedType = button.attr('data-bedType')
+        let miniBar = button.attr('data-miniBar')
+        let airConditioning = button.attr('data-airConditioning')
+        
 
-        let modal = $(this)
-        modal.find('.modal-body #id').val(id);
+
+        let modal = $(this); 
+        modal.find('.modal-title').text("Room No: ".concat(String(roomNo)));
+        modal.find('.modal-body #roomNo').val(roomNo);
+        modal.find('.modal-body #InRoomType option[value='+roomTypeId+']').attr('selected', true);
+        modal.find('.modal-body #bedType option[value='+bedType+']').attr('selected', true);
+        modal.find('.modal-body #miniBar').val(miniBar);
+        modal.find('.modal-body #InAir').val(airConditioning);
+        modal.find('.modal-body #cleanState option[value='+cleanState+']').attr('selected', true);
+
+        
+        //$("#select option[value=3]").attr('selected', 'selected');
+        
     });
+    //$('#viewRoomDetailsModal').on('show.bs.modal', function (event){
+    //    alert("modal opened");
+    //    console.log()"Modal Opened");
+        // $.ajax({
+        //     url: "/api/getAllRooms",
+        //     type: "GET",
+        //     data:{ 
+        //         _token:'{{ csrf_token() }}'
+        //     },
+        //     cache: false,
+        //     dataType: 'json',
+        //     success: function(dataResult){
+        //         alert("hello");
+                // console.log(dataResult);
+                // var resultData = dataResult.data;
+                // var bodyData = '';
+                // var i=1;
+                // $.each(resultData,function(index,row){
+                //     var editUrl = url+'/'+row.id+"/edit";
+                //     bodyData+="<tr>"
+                //     bodyData+="<td>"+ i++ +"</td><td>"+row.name+"</td><td>"+row.email+"</td><td>"+row.phone+"</td>"
+                //     +"<td>"+row.city+"</td><td><a class='btn btn-primary' href='"+editUrl+"'>Edit</a>" 
+                //     +"<button class='btn btn-danger delete' value='"+row.id+"' style='margin-left:20px;'>Delete</button></td>";
+                //     bodyData+="</tr>";
+                    
+                //})
+                //$("#viewRoomDetailsModal").append(dataResult);
+    //});
+    
+
+    
 
 </script>
 </html>

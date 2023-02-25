@@ -124,7 +124,7 @@
 		.hero_color{
 			width: 100%;
 			height: 100vh;
-			background-color: #ffffb3;
+			background-color: white;
 			background-size: cover;
 			background-position: center;
 			postition: relative;
@@ -196,7 +196,7 @@
 	
 </head>
 <body>
-	<div class="hero">
+	<div class="hero-color">
 	<!-- Header -->
 	<div class=" container-fluid" style="height: 0.5vh; box-shadow: 10px;">
 		<div class="flex-container-row-opposite pr-5">

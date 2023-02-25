@@ -75,6 +75,8 @@ Route::post('/editLocator',[locatorController::class,'EditLocator']);
 Route::get('/deleteLocator{locatorId}',[locatorController::class,'deleteLocator']);
 Route::get('/getNotifications',[notificationController::class,'getNotifications']);
 Route::get('/roomManagement',[roomController::class,'roomManagement']);
+Route::post('/addRoom',[roomController::class,'addRoom']);
+Route::post('/editRoom',[roomController::class,'editRoom']);
 //Modification: Geethaka End
 
 //Modification:Tehan Start

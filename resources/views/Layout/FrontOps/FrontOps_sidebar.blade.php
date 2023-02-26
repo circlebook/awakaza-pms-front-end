@@ -1,5 +1,5 @@
 @php
-    $role = session('role');
+$role = session('role');
 
 @endphp
 <div class="vertical-menu">
@@ -29,8 +29,20 @@
 
                     </a>
                 </li>
+                <!-- Added By Sandarekha -->
+                <li class="menu-title" key="t-menu">Room management</li>
 
-        
+                <li>
+                    <a href="{{url('/room_management')}}" class="waves-effect bx-fade-right-hover">
+                        <i class="bx bx bxs-user"></i>
+                        <span key="t-dashboards">Change room</span>
+
+                    </a>
+                </li>
+                <!-- Add End -->
+
+
+
                 <li class="menu-title" key="t-menu">Guest Profiles</li>
 
                 <li>

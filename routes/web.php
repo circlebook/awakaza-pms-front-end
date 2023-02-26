@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\locatorController;
 use App\Http\Controllers\grcController;
+use App\Http\Controllers\foodController;
+use App\Http\Controllers\minibarController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -82,3 +86,36 @@ Route::get('/grcForm', function () {
 
 Route::post('/createGrc',[grcController::class,'createGrc']);
 
+//Modifications: Sandarekha
+
+ 
+ 
+//billing
+
+
+
+
+Route::get('/createbill', function () {
+    return view('Billing.createbill');
+});
+//end billing
+//room management
+
+
+//end room management
+
+Route::get('/room_management', function () {
+    return view('FrontOps.room_management');
+});
+
+//end room managemeent
+
+//Minibar
+Route::get('/Mini_bar',[minibarController::class,'miniBarItemGetAll']);
+Route::post('/Mini_bar_itemAdd',[minibarController::class,'insertMinibarItem']);
+Route::post('/Mini_bar_itemEdit',[minibarController::class,'editMinibarItem']);
+
+
+
+
+//Modifications: Sandarekha end

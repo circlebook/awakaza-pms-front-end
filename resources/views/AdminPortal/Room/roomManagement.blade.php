@@ -384,39 +384,8 @@
         modal.find('.modal-body #miniBar').val(miniBar);
         modal.find('.modal-body #InAir').val(airConditioning);
         modal.find('.modal-body #cleanState option[value='+cleanState+']').attr('selected', true);
-
-        
-        //$("#select option[value=3]").attr('selected', 'selected');
         
     });
-    //$('#viewRoomDetailsModal').on('show.bs.modal', function (event){
-    //    alert("modal opened");
-    //    console.log()"Modal Opened");
-        // $.ajax({
-        //     url: "/api/getAllRooms",
-        //     type: "GET",
-        //     data:{ 
-        //         _token:'{{ csrf_token() }}'
-        //     },
-        //     cache: false,
-        //     dataType: 'json',
-        //     success: function(dataResult){
-        //         alert("hello");
-                // console.log(dataResult);
-                // var resultData = dataResult.data;
-                // var bodyData = '';
-                // var i=1;
-                // $.each(resultData,function(index,row){
-                //     var editUrl = url+'/'+row.id+"/edit";
-                //     bodyData+="<tr>"
-                //     bodyData+="<td>"+ i++ +"</td><td>"+row.name+"</td><td>"+row.email+"</td><td>"+row.phone+"</td>"
-                //     +"<td>"+row.city+"</td><td><a class='btn btn-primary' href='"+editUrl+"'>Edit</a>" 
-                //     +"<button class='btn btn-danger delete' value='"+row.id+"' style='margin-left:20px;'>Delete</button></td>";
-                //     bodyData+="</tr>";
-                    
-                //})
-                //$("#viewRoomDetailsModal").append(dataResult);
-    //});
     
 
     

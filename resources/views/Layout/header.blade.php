@@ -3,20 +3,7 @@
     $role = session('role');
 	$name = session('name');
 @endphp
-<!-- added by Geethaka: ajax function to get notifications -->
-<script>
-         function getMessage() {
-            $.ajax({
-               type:'POST',
-               url:'/getnotifications',
-               data:'_token = <?php echo csrf_token() ?>',
-               success:function(data) {
-                
-               }
-            });
-         }
-</script>
-<!-- end Geethaka -->
+
 
 
 <header id="page-topbar">
@@ -75,10 +62,8 @@
                                 <h6 class="m-0" key="t-notifications"> Notifications </h6>
                             </div>
                             <!-- Added by geethaka -->
-                            <div class="d-flex flex-column">
-                                <div style="border-style='solid'; border">hello 1</div>
-                                <div><hr></div>
-                                
+                            <div class="d-flex flex-column" id="notifications_div">
+
                             </div>
                              <!-- Geethaka End -->
 
@@ -182,4 +167,32 @@ aria-labelledby="myLargeModalLabel" aria-hidden="true">
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<!-- added by Geethaka: ajax function to get notifications -->
+<script type="text/javascript">
+    $(document).ready(function () {
+    $('body').on('click', '#page-header-notifications-dropdown', function () {
+      var userURL = $(this).data('getNotifications');
+      $('#notifications_div').append("hello");
+        $.ajax({
+
+            url: userURL,
+            type: 'GET',
+            dataType: 'json',
+
+            success: function(data) {
+                $('#notifications_div').append("hello");
+            }
+
+        });
+
+
+
+   });
+
+    
+
+});
+</script>
+<!-- end Geethaka -->
 

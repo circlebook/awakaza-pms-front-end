@@ -1,5 +1,5 @@
 @php
-    $role = session('role');
+$role = session('role');
 
 @endphp
 <div class="vertical-menu">
@@ -20,17 +20,31 @@
                     </a>
                 </li>
 
-             
-                <li class="menu-title" key="t-menu">Billing</li>
+
+                <li class="menu-title" key="t-menu">Add new</li>
+
+                <li>
+                    <a href="{{url('/createbill')}}" class="waves-effect bx-fade-right-hover">
+                        <i class="fa fa-duotone fa-credit-card"></i>
+                        <span key="t-dashboards">Create Bill</span>
+
+                    </a>
+                </li>
+                <!-- Added By Sandarekha -->
+
+
+                <li class="menu-title" key="t-menu">Advance option</li>
 
                 <li>
                     <a href="{{url('/Maintenance')}}" class="waves-effect bx-fade-right-hover">
                         <i class="fa fa-duotone fa-credit-card"></i>
-                        <span key="t-dashboards">View Bill</span>
+                        <span key="t-dashboards">Spliting bill</span>
 
                     </a>
                 </li>
-              
+                <!-- Add End -->
+
+
 
 
             </ul>

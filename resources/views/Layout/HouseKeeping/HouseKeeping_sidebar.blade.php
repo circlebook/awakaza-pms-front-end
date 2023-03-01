@@ -1,5 +1,5 @@
 @php
-    $role = session('role');
+$role = session('role');
 
 @endphp
 <div class="vertical-menu">
@@ -33,7 +33,7 @@
                 <li class="menu-title" key="t-menu">Mini Bar</li>
 
                 <li>
-                    <a href="{{url('/Maintenance')}}" class="waves-effect bx-fade-right-hover">
+                    <a href="{{url('/Mini_bar')}}" class="waves-effect bx-fade-right-hover">
                         <i class="bx bx bxs-wine"></i>
                         <span key="t-dashboards">Update Mini Bar</span>
 

@@ -95,10 +95,6 @@ Route::post('/createGrc',[grcController::class,'createGrc']);
 
 //Modification:Tehan Start
 
-Route::get('/grcForm', function () {
-    return view('FrontOps.FrontOps_Grc');
-});
-
 Route::post('/createGrc',[grcController::class,'createGrc']);
 
 //Modifications: Sandarekha
@@ -134,3 +130,11 @@ Route::post('/Mini_bar_itemEdit',[minibarController::class,'editMinibarItem']);
 
 
 //Modifications: Sandarekha end
+Route::get('/gProfile', function () {
+    return view('FrontOps.FrontOps_gProfile');
+
+});
+
+Route::get('/FrontOps_Grc',[grcController::class,'showGuest']);
+
+Route::post('/editGRC',[grcController::class,'editGRC']);

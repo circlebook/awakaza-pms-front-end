@@ -19,10 +19,43 @@
     <!-- ========== Left Sidebar Start ========== -->
 @include('Layout.FrontOps.FrontOps_sidebar')
 <!-- Left Sidebar End -->
-<section class="pt-5 col-4 container" style="margin-top:3%;">
+<!--<section class="pt-5 col-4 " style="margin-top:3%; ">-
 
-<!-- added by geethaka -->
-          @if(session()->has('message'))
+<!added by geethaka -->
+         
+<!-- geethaka end -->
+
+<div class="main-content">
+
+  <div class="page-content">
+      <div class="container-fluid">
+
+<div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                            <h4 class="mb-sm-0 font-size-18">Guests</h4>
+
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Guest Registration</a></li>
+                                    <li class="breadcrumb-item active">GRC Management</li>
+                                </ol>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                   <div class="col-md-3">
+                       <button class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal"
+                          data-bs-target="#createGRCModal">Create GRC</button>
+                   </div>
+                </div>
+
+                <br>
+
+                @if(session()->has('message'))
                         <div class="col-md-4">
                             <div class="alert alert-success alert-dismissible fade show" role="alert">
                                 {{ session()->get('message') }}
@@ -38,69 +71,262 @@
                             </div>
                         </div>
          @endforeach
-<!-- geethaka end -->
 
-<form class="shadow rounded" style="margin-top:10%; background-image: linear-gradient(to right, rgb(230,230,250) , rgb(176,196,222));" action="{{url('createGrc')}}" method="post">
-{{csrf_field()}}
-<h4 class="text-center pt-3 mb-3">Create GRC card</h4>
-<h4 class="text-center pt-3 mb-3">GRC No:</h4>
-<div class="container">
+         <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
 
-<div class="row mb-3 px-3">
-<label for="name" class="form-label">Full Name</label>
-  <div class="col">
-    <input type="text" name="firstName" id="firstName" class="form-control" placeholder="Enter First name" aria-label="First name*" id="firstName" name="firstName">
-  </div>
-  <div class="col">
-    <input type="text" name="lastName"  id="lastName"  class="form-control" placeholder="Enter Last name" aria-label="Last name*" id="lastName" name="lastName">
-  </div>
-</div>
+                                <div class="scrollme">
+                                    <table id="datatable-buttons" class="table table-responsive nowrap w-100">
+                                    <thead>
+                                    <tr>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>NIC no</th>
+                                        <th>E-Mail</th>
+                                        <th></th>
+                                        <th></th>
 
-<div class="row mb-3 px-3">
-<label for="name" class="form-label">Identity Details</label>
-  <div class="col">
-    <input type="text" name="passportNo" id="passportNo" class="form-control" placeholder="Enter Passport number" aria-label="Passport number">
-  </div>
-  <div class="col">
-    <input type="text" name="nicNo"    id="nicNo" class="form-control" placeholder="Enter NIC number" aria-label="NIC Number">
-  </div>
-</div>
+                                    </tr>
+                                    </thead>
 
-<div class="row mb-3 px-3">
-  <div class="col">
-    <input type="date" name="birthDay" id="birthDay" class="form-control" placeholder="Enter Date of Birth" aria-label="Date of birth*">
-  </div>
-</div>  
 
-<div class="row mb-3 px-3">
-<label for="name" class="form-label">Contact Details</label>
-  <div class="col">
-    <input type="text" name="phoneNo" id="phoneNo" class="form-control" placeholder="Enter Phone Number" aria-label="Phone Number*">
-  </div>
-  <div class="col">
-    <input type="text" name="email" id="email" class="form-control" placeholder="Enter Email Address" aria-label="Email Address*">
-  </div>
-</div>
+                                    <tbody>
+                                    
+                                    @if(!empty($data))
+                                        @foreach($data as $item)
+                                            
+                                                
+                                                <tr>
+                                                    <td>{{$item->firstName}}</td>
+                                                    <td>{{$item->lastName}}</td>
+                                                    <td>{{$item->NIC}}</td>
+                                                    <td>{{$item->email}}</td>
+                                                    <td><button id="{{$item->id}}" class="btn btn-outline-warning btn-sm waves-effect waves-light" data-bs-toggle="modal" data-bs-target="#editGRCModal" 
+                                                        data-firstName="{{$item->firstName}}"
+                                                        data-lastName="{{$item->lastName}}"
+                                                        data-passportNo="{{$item->passportNo}}" 
+                                                        data-nicNo="{{$item->NIC}}"
+                                                        data-birthDay="{{$item->DOB}}"
+                                                        data-phoneNo="{{$item->contactNo}}"
+                                                        data-email="{{$item->email}}"
+                                                        {{-- data-arrivalD="{{$item->arrivalD}}"
+                                                        data-departureD="{{$item->departureD}}" --}}
+                                                        
+                                                        >Edit Details</button> </td>
+                                                </tr>
+                                                   
+                                            @endforeach
+                                    @endif
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- end col -->
+                </div>
 
-<div class="row mb-3 px-3">
-<label for="name" class="form-label">Visiting information</label>
-  <div class="col">
-    <input type="date" name="arrivalD" id="arrivalD" class="form-control" placeholder="Enter arrival Date" aria-label="Arrival Date*">
-  </div>
-  <div class="col">
-    <input type="date" name="departureD" id="departureD" class="form-control" placeholder="Enter Departure Date" aria-label="Departure Date*">
-  </div>
-</div>
+              <div id="createGRCModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+               <div class="modal-dialog">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                           <h5 class="modal-title mt-0" id="myModalLabel">Create GRC</h5>
+                           <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                   aria-label="Close"></button>
+                       </div>
+                       <div class="modal-body">
+                           <form action="{{url('createGrc')}}" method="post" enctype="multipart/form-data">
+                               {{csrf_field()}}
+                               <div class="mb-3">
+                                   <label for="" class="form-label">first Name</label>
+                                   <input type="text" class="form-control" id="firstName" name="firstName" required>
+                               </div>
+                               <div class="mb-3">
+                                   <label for="" class="form-label">Last Name</label>
+                                   <input type="text" class="form-control" id="lastName" name="lastName" required>
+                               </div>
+                               <div class="mb-3">
+                                <label for="" class="form-label">Passport Number</label>
+                                <input type="text" class="form-control" id="passportNo" name="passportNo" required>
+                              </div>
 
-</div>
-  <div class="mt-5 pb-3 px-3">
-  <button type="submit" class="btn btn-primary">Confirm</button>
-</div>
+        
 
-</div>
-</div>
-</form>
-</section> 
+                              <div class="mb-3">
+                                <label for="" class="form-label">NIC Number</label>
+                                <input type="text" class="form-control" id="nicNo" name="nicNo" required>
+                              </div>
+                              
+                              <div class="mb-3">
+                                <label for="" class="form-label">Birthday</label>
+                                <input type="date" class="form-control" id="birthDay" name="birthDay" required>
+                              </div>
+
+
+                                <div class="mb-3">
+                                   <label for="" class="form-label">Contact Number</label>
+                                   <input type="number" class="form-control"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"  maxlength="10"
+
+                                   id="phoneNo" name="phoneNo" required >
+                               </div>
+
+                               <div class="mb-3">
+                                <label for="" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                              </div>
+
+
+                               {{-- <div class="mb-3">
+                                   <label for="" class="form-label">Arrival date</label>
+                                   <input type="date" class="form-control" id="arrivalD" name="arrivalD" required>
+                               </div>
+
+                               <div class="mb-3">
+                                <label for="" class="form-label">Departure date</label>
+                                <input type="date" class="form-control" id="departureD" name="departureD" required>
+                              </div> --}}
+
+                              
+                               <div class="mb-3">
+                                   <button type="submit" class="btn btn-primary waves-effect waves-light">Save
+                                       </button>
+                               </div>
+                           </form>
+                       </div>
+                       <div class="modal-footer">
+                           <button type="button" class="btn btn-outline-danger waves-effect waves-light"
+                                   data-bs-dismiss="modal">Close</button>
+   
+                       </div>
+   
+                   </div>
+                </div>
+           </div>
+
+           <div id="editGRCModal" class="modal fade" tabindex="-1" aria-labelledby="myModalLabel"
+                aria-hidden="true">
+               <div class="modal-dialog">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                           <h5 class="modal-title mt-0" id="myModalLabel">Edit GRC</h5>
+                           <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                   aria-label="Close"></button>
+                       </div>
+                       <div class="modal-body">
+                           <form action="{{url('editGRC')}}" method="post" enctype="multipart/form-data">
+                               {{csrf_field()}}
+                               <input type="text" class="form-control" id="id" name="id" required hidden>
+                               <div class="mb-3">
+                                   <label for="" class="form-label">first Name</label>
+                                   <input type="text" class="form-control" id="firstName" name="firstName" required>
+                               </div>
+                               <div class="mb-3">
+                                   <label for="" class="form-label">Last Name</label>
+                                   <input type="text" class="form-control" id="lastName" name="lastName" required>
+                               </div>
+                               <div class="mb-3">
+                                <label for="" class="form-label">Passport Number</label>
+                                <input type="text" class="form-control" id="passportNo" name="passportNo" required>
+                              </div>
+
+        
+
+                              <div class="mb-3">
+                                <label for="" class="form-label">NIC Number</label>
+                                <input type="text" class="form-control" id="nicNo" name="nicNo" required>
+                              </div>
+                              
+                              <div class="mb-3">
+                                <label for="" class="form-label">Birthday</label>
+                                <input type="date" class="form-control" id="birthDay" name="birthDay" required>
+                              </div>
+
+
+                                <div class="mb-3">
+                                   <label for="" class="form-label">Contact Number</label>
+                                   <input type="number" class="form-control"  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"  maxlength="10"
+
+                                   id="phoneNo" name="phoneNo" required >
+                               </div>
+
+                               <div class="mb-3">
+                                <label for="" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                              </div>
+
+
+                               {{-- <div class="mb-3">
+                                   <label for="" class="form-label">Arrival date</label>
+                                   <input type="date" class="form-control" id="arrivalD" name="arrivalD" required>
+                               </div>
+
+                               <div class="mb-3">
+                                <label for="" class="form-label">Departure date</label>
+                                <input type="date" class="form-control" id="departureD" name="departureD" required>
+                              </div> --}}
+
+                              
+                               <div class="mb-3">
+                                   <button type="submit" class="btn btn-primary waves-effect waves-light">Save
+                                       </button>
+                               </div>
+                           </form>
+                       </div>
+                       <div class="modal-footer">
+                           <button type="button" class="btn btn-outline-danger waves-effect waves-light"
+                                   data-bs-dismiss="modal">Close</button>
+   
+                       </div>
+   
+                   </div>
+                </div>
+           </div>
+           @include('Layout.footer')
+                
+
+          </div>
+        </div>
+      </div>
+
 @include('Layout.appJs')
+
+
 </body>
+
+
+<script>
+    $('#editGRCModal').on('show.bs.modal', function (event) {
+        
+        let button = $(event.relatedTarget)
+        let id = button.attr('id')
+        let firstName = button.attr('data-firstName')
+        let lastName = button.attr('data-lastName')
+        let passportNo = button.attr('data-passportNo')
+        let nicNo = button.attr('data-nicNo')
+        let birthDay = button.attr('data-birthDay')
+        let phoneNo = button.attr('data-phoneNo')
+        let email = button.attr('data-email')
+        // let arrivalD = button.attr('data-arrivalD')
+        // let departureD = button.attr('data-departureD')
+
+        let modal = $(this); 
+        modal.find('.modal-title').text("GRCid: ".concat(String(id)));
+        modal.find('.modal-body #id').val(id);
+        modal.find('.modal-body #firstName').val(firstName);
+        modal.find('.modal-body #lastName').val(lastName);
+        modal.find('.modal-body #passportNo').val(passportNo);
+        modal.find('.modal-body #nicNo').val(nicNo);
+        modal.find('.modal-body #birthDay').val(birthDay);
+        modal.find('.modal-body #phoneNo').val(phoneNo);
+        modal.find('.modal-body #email').val(email);
+        // modal.find('.modal-body #arrivalD').val(arrivalD);
+        // modal.find('.modal-body #departureD').val(departureD);
+        
+    });
+    
+    
+</script>
+
 </html>
